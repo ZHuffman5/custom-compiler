@@ -1,10 +1,17 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "utility.h"
 
-char look;
+LookBuffer buffer;
+
+void init() {
+	buffer.look = (char *) malloc(MSG_LEN);
+	getInput();
+}
 
 void getInput() {
-	look = getchar();
+	buffer.look = getchar();
+	buffer.index = 1;
 }
 
 int readln(char *buffer, int size) {
