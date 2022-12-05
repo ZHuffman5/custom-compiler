@@ -4,8 +4,12 @@
 
 int main(int argc, char const *argv[])
 {
-	char *msg = (char *) malloc(msg_len);
-	readln(msg, msg_len);
-	printf("%s\n",msg);
+	//char *msg = (char *) malloc(msg_len);
+	//readln(msg, msg_len);
+	getInput();
+	while (look != 'q') {
+		printf("%c\n", look);
+		getInput();
+	}
 	return 0;
 }

@@ -1,4 +1,11 @@
 #include <stdio.h>
+#include "utility.h"
+
+char look;
+
+void getInput() {
+	look = getchar();
+}
 
 int readln(char *buffer, int size) {
 	char c;
