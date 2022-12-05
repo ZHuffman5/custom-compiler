@@ -5,5 +5,5 @@ size_t initialBufferAddr;
 
 void getInput();
 void init();
-void bufferReturn();
+char *bufferReturn();
 // int readln(char*, int);

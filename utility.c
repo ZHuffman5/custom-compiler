@@ -5,7 +5,10 @@
 char* buffer;
 size_t initialBufferAddr;
 
-inline void bufferReturn() { buffer -= ((size_t)buffer-initialBufferAddr); } // returns buffer to beginning of string
+inline char *bufferReturn() {
+	buffer -= ((size_t)buffer-initialBufferAddr); 
+	return buffer;
+} // returns buffer to beginning of string
 
 void getInput() {
 	*buffer = getchar();

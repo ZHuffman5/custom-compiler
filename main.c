@@ -8,7 +8,6 @@ int main(int argc, char const *argv[])
 {
 	init();
 	*buffer = '\0';
-	bufferReturn();
-	printf("%s\n", buffer);
+	printf("%s\n", bufferReturn());
 	return 0;
 }
