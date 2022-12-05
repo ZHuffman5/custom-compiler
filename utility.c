@@ -6,6 +6,7 @@ LookBuffer buffer;
 
 void init() {
 	buffer.look = (char *) malloc(MSG_LEN);
+	buffer.index = 0;
 	getInput();
 }
 
