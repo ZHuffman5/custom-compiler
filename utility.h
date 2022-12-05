@@ -1,14 +1,9 @@
 #define MSG_LEN 101 // last char of len is taken up by \0
 
-typedef struct {
+char* buffer;
+size_t initialBufferAddr;
 
-	size_t index;
-	char* look;
-
-} LookBuffer; 
-
-LookBuffer buffer;
-
-void init();
 void getInput();
-int readln(char*, int);
+void init();
+void bufferReturn();
+// int readln(char*, int);

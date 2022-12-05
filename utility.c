@@ -2,19 +2,26 @@
 #include <stdlib.h>
 #include "utility.h"
 
-LookBuffer buffer;
+char* buffer;
+size_t initialBufferAddr;
+
+inline void bufferReturn() { buffer -= ((size_t)buffer-initialBufferAddr); } // returns buffer to beginning of string
+
+void getInput() {
+	*buffer = getchar();
+	while (*buffer != ' ' && ((size_t)buffer-initialBufferAddr) < MSG_LEN) {
+		buffer++;
+		*buffer = getchar();
+	}	
+}
 
 void init() {
-	buffer.look = (char *) malloc(MSG_LEN);
-	buffer.index = 0;
+	buffer = (char *) malloc(MSG_LEN);
+	initialBufferAddr = (size_t) buffer;
 	getInput();
 }
 
-void getInput() {
-	buffer.look = (char *) getchar();
-	
-}
-
+/*
 int readln(char *buffer, int size) {
 	char c;
 	int i = 0;
@@ -29,3 +36,5 @@ int readln(char *buffer, int size) {
 	buffer[i] = '\0';
 	return size;
 }
+
+// */
