@@ -5,6 +5,6 @@
 int main(int argc, char const *argv[])
 {
 	init();
-	printf("%d\n", buffer.index);
+	printf("%c\n", buffer.look);
 	return 0;
 }

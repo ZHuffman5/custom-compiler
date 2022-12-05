@@ -6,12 +6,13 @@ LookBuffer buffer;
 
 void init() {
 	buffer.look = (char *) malloc(MSG_LEN);
+	buffer.index = 0;
 	getInput();
 }
 
 void getInput() {
-	buffer.look = getchar();
-	buffer.index = 1;
+	buffer.look = (char *) getchar();
+	
 }
 
 int readln(char *buffer, int size) {
