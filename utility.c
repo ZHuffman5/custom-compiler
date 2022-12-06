@@ -4,35 +4,41 @@
 #include "utility.h"
 
 char* buffer;
-size_t initialBufferAddr;
-
-inline char *bufferReturn() {
-	buffer -= ((size_t)buffer-initialBufferAddr); 
-	return buffer;
-} // returns buffer to beginning of string
 
 void getInput() {
+	int index = 0;
 	memset(buffer, 0, sizeof(buffer));
-	*buffer = getchar();
-	while (*buffer != ' ' && ((size_t)buffer-initialBufferAddr) < MSG_LEN) {
-		buffer++;
-		*buffer = getchar();
+
+	buffer[index] = getchar();
+	while (buffer[index] != ' ') {
+		index++;
+		buffer[index] = getchar();
 	}
-	*buffer = '\0';	
+	buffer[index] = '\0';	
+}
+
+void giveError(char *error) {
+	printf("Error: %s", error);
+	exit(-1);
+}
+
+void match(char *input) {
+	if (strcmp(input, buffer) != 0)
+		giveError("Expected expression");
+	getInput();
 }
 
 void expression() {
 
-	if (strcmp(bufferReturn(), ""))
-		printf("thing");
+	match("+");
+	printf("did plus");
+	match("0");
+	printf("\ndid other thing!");
 
 }
 
-
-
 void init() {
 	buffer = (char *) malloc(MSG_LEN);
-	initialBufferAddr = (size_t) buffer;
 	getInput();
 }
 

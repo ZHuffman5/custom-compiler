@@ -7,6 +7,6 @@
 int main(int argc, char const *argv[])
 {
 	init();
-	printf("%s\n", bufferReturn());
+	expression();
 	return 0;
 }
