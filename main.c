@@ -7,7 +7,6 @@
 int main(int argc, char const *argv[])
 {
 	init();
-	*buffer = '\0';
 	printf("%s\n", bufferReturn());
 	return 0;
 }
