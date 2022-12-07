@@ -1,12 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "utility.h"
-
 
 
 int main(int argc, char const *argv[])
 {
-	init();
+	init(argv[1]);
 	expression();
+	fclose(fpt);
 	return 0;
 }

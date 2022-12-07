@@ -1,45 +1,86 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
+#include <ctype.h>	// isdigit()
 #include "utility.h"
 
 char* buffer;
-
-void getInput() {
-	int index = 0;
-	memset(buffer, 0, sizeof(buffer));
-
-	buffer[index] = getchar();
-	while (buffer[index] != ' ') {
-		index++;
-		buffer[index] = getchar();
-	}
-	buffer[index] = '\0';	
-}
+FILE* fpt;
 
 void giveError(char *error) {
-	printf("Error: %s", error);
+	printf("Error: %s\n", error);
 	exit(-1);
 }
 
+int isAlpha(char look) {
+	int ascii = (int) look;
+	if ((ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122))
+		return 1;
+	return 0; // else
+}
+
+// Grab next char from read file
+// *note* buffer is not cleared, only first bit in memeory is changed
+void getNext() {
+	fread(buffer, sizeof(char), 1, fpt);
+}
+
+// Put a string ('a-z') into buffer
+void getWord() {
+	int index = 0;
+	memset(buffer, 0, sizeof(buffer));
+	getNext();
+	if (!isAlpha(*buffer))
+		giveError("Expected alpha char...");
+	while (isAlpha(*buffer)) {
+		index++;
+		buffer++;
+		getNext();
+	}
+	if (*buffer != ' ')
+		giveError("Expected alpha char...");
+	buffer -= index;
+}
+
+// Put a number into buffer (as char)
+void getNumber() {
+	int index = 0;
+	memset(buffer, 0, sizeof(buffer));
+	getNext();
+	if (!isdigit(*buffer))
+		giveError("Expected number...");
+	while (isdigit(*buffer)) {
+		index++;
+		buffer++;
+		getNext();
+	}
+	if (*buffer != ' ')
+		giveError("Expected number...");
+	buffer -= index;
+}
+
+// 
 void match(char *input) {
 	if (strcmp(input, buffer) != 0)
 		giveError("Expected expression");
-	getInput();
+	getWord();
 }
 
 void expression() {
 
-	match("+");
-	printf("did plus");
-	match("0");
-	printf("\ndid other thing!");
-
+	getNumber();
+	printf("%s\n", buffer);
+	getWord();
+	printf("%s\n", buffer);
 }
 
-void init() {
+// Setup program
+void init(const char *filename) {
 	buffer = (char *) malloc(MSG_LEN);
-	getInput();
+	if ((fpt = fopen(filename, "r")) == NULL)		// Open read file
+		giveError("File \'%s\' not found...");
+
+	// TODO: open write to asm file
+
 }
 
 

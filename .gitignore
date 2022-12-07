@@ -3,4 +3,6 @@
 *.o
 *.asm
 test.c
+test
 compile
+code.z
