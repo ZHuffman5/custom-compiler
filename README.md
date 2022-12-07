@@ -1,6 +1,6 @@
 # Custom Compiler in C
 
-Creating my own syntax or language similar to C and pascal.
+Creating my own compiler for a custom syntax similar to pascal or C
 
 ## x86_64 ASM
 
