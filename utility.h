@@ -2,9 +2,11 @@
 #define MSG_LEN 101 // last char of len is taken up by \0
 
 extern char* buffer;
-extern FILE* fpt;
+extern FILE* fp;
+extern FILE* ofp;
 
 int isAlpha(char);
+void addop();
 void getNext();
 void getWord();
 void giveError(char*);

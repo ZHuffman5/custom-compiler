@@ -4,7 +4,8 @@
 #include "utility.h"
 
 char* buffer;
-FILE* fpt;
+FILE* fp;
+FILE* ofp;
 
 void giveError(char *error) {
 	printf("Error: %s\n", error);
@@ -21,7 +22,7 @@ int isAlpha(char look) {
 // Grab next char from read file
 // *note* buffer is not cleared, only first bit in memeory is changed
 void getNext() {
-	fread(buffer, sizeof(char), 1, fpt);
+	fread(buffer, sizeof(char), 1, fp);
 }
 
 // Put a string ('a-z') into buffer
@@ -48,6 +49,8 @@ void getNumber() {
 	getNext();
 	if (!isdigit(*buffer))
 		giveError("Expected number...");
+	else if (*buffer == '+' || *buffer == '-')
+		addop();
 	while (isdigit(*buffer)) {
 		index++;
 		buffer++;
@@ -65,6 +68,15 @@ void match(char *input) {
 	getWord();
 }
 
+// parse and translate a addop or signop
+void addop() {
+
+}
+
+void factor() {
+
+}
+
 void expression() {
 
 	getNumber();
@@ -76,11 +88,11 @@ void expression() {
 // Setup program
 void init(const char *filename) {
 	buffer = (char *) malloc(MSG_LEN);
-	if ((fpt = fopen(filename, "r")) == NULL)		// Open read file
+	if ((fp = fopen(filename, "rb")) == NULL)		// Open read file
 		giveError("File \'%s\' not found...");
 
-	// TODO: open write to asm file
-
+	if ((ofp = fopen("wb")) == NULL)					// Open output file
+		giveError("Failed creating output asm file...");
 }
 
 
