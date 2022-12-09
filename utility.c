@@ -19,6 +19,12 @@ int isAlpha(char look) {
 	return 0; // else
 }
 
+int isAddop(char look) {
+	if (look == '+' || look == '-')
+		return 1;
+	return 0; // else
+}
+
 // Grab next char from read file
 // *note* buffer is not cleared, only first bit in memeory is changed
 void getNext() {
@@ -78,11 +84,22 @@ void factor() {
 }
 
 void expression() {
+	if (isAddop(*look)) {
+		
+		while (isAddop(*look)) {
+			switch (*look) {
+				case '+': 
+					add();
+					break;
+				case '-':
+					sub();
+					break;
+				default:
+					break;
+			}// end switch			
+		}// end while
+	} else factor();	
 
-	getNumber();
-	printf("%s\n", buffer);
-	getWord();
-	printf("%s\n", buffer);
 }
 
 // Setup program
@@ -93,6 +110,7 @@ void init(const char *filename) {
 
 	if ((ofp = fopen("wb")) == NULL)					// Open output file
 		giveError("Failed creating output asm file...");
+	getNext();
 }
 
 

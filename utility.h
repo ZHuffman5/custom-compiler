@@ -6,6 +6,7 @@ extern FILE* fp;
 extern FILE* ofp;
 
 int isAlpha(char);
+int isAddop(char);
 void addop();
 void getNext();
 void getWord();
