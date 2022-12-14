@@ -7,18 +7,22 @@ char* buffer;
 FILE* fp;
 FILE* ofp;
 
+// Output error and stop program execution
 void giveError(char *error) {
 	printf("Error: %s\n", error);
-	exit(-1);
+	exit(-1);	// exit code of -1
 }
 
+// Check if char is a-z or A-Z char
+// return 1 if true, 0 if false
 int isAlpha(char look) {
-	int ascii = (int) look;
+	int ascii = (int) look;		// convert char to ascii code
 	if ((ascii >= 65 && ascii <= 90) || (ascii >= 97 && ascii <= 122))
 		return 1;
 	return 0; // else
 }
 
+// Checks if char is an addop operation char
 int isAddop(char look) {
 	if (look == '+' || look == '-')
 		return 1;
@@ -26,7 +30,7 @@ int isAddop(char look) {
 }
 
 // Grab next char from read file
-// *note* buffer is not cleared, only first bit in memeory is changed
+// *note* buffer is not cleared, only first bit in buffer memory chunk is changed
 void getNext() {
 	fread(buffer, sizeof(char), 1, fp);
 }
@@ -36,16 +40,16 @@ void getWord() {
 	int index = 0;
 	memset(buffer, 0, sizeof(buffer));
 	getNext();
-	if (!isAlpha(*buffer))
+	if (!isAlpha(*buffer))		// error catching for debug purposes
 		giveError("Expected alpha char...");
 	while (isAlpha(*buffer)) {
 		index++;
 		buffer++;
 		getNext();
 	}
-	if (*buffer != ' ')
+	if (*buffer != ' ')		// error catching for debug purposes
 		giveError("Expected alpha char...");
-	buffer -= index;
+	buffer -= index;		// reset memory position pointed at to beginning of buffer block
 }
 
 // Put a number into buffer (as char)
@@ -83,23 +87,20 @@ void factor() {
 
 }
 
-void expression() {
-	if (isAddop(*look)) {
-		
-		while (isAddop(*look)) {
-			switch (*look) {
-				case '+': 
-					add();
-					break;
-				case '-':
-					sub();
-					break;
-				default:
-					break;
-			}// end switch			
-		}// end while
-	} else factor();	
-
+void expression() {	
+	while (isAddop(*look)) {
+		switch (*look) {
+			case '+': 
+				add();
+				break;
+			case '-':
+				sub();
+				break;
+			default:
+				break;
+		}// end switch			
+	}// end while
+	factor();	
 }
 
 // Setup program
@@ -113,10 +114,7 @@ void init(const char *filename) {
 	getNext();
 }
 
-
-
-
-
+// Old input reader
 /*
 int readln(char *buffer, int size) {
 	char c;
