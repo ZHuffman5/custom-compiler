@@ -1,9 +1,9 @@
 #include <stdlib.h>
 #define MSG_LEN 101 // last char of len is taken up by \0
 
-extern char* buffer;
-extern FILE* fp;
-extern FILE* ofp;
+extern char* buffer;    // Gets allocated static memory chunk at prgm start
+extern FILE* fp;        // Read File Pointer
+extern FILE* ofp;       // Output File pointer
 
 int isAlpha(char);
 int isAddop(char);
