@@ -4,6 +4,4 @@
 *.asm
 test.c
 test
-compile
-code.z
 result.asm
