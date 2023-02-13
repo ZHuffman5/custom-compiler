@@ -6,6 +6,6 @@ Creating my own compiler for a custom syntax similar to pascal or C
 
 compile to nasm syntax 64 bit assembly lang.
 
-## Extra
+## Notes
 
 This is still a WIP, I'm using this as a learning expierence. Things are subject to change as I go.
