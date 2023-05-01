@@ -6,3 +6,4 @@ else
     gcc $1.c
 fi
 ./a.out
+rm a.out
